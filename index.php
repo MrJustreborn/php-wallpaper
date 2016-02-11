@@ -28,7 +28,7 @@ $bar_klein_lila = imagecreatefrompng($path.'/images/progress/bar_klein_lila_alph
 $wookie = imagecreatefrompng($path.'/images/wookie.png');
 
 $wookie_back = imagecreatefromjpeg($path.'/images/wookie.jpg');
-imagecopyresampled($imagecontainer, $wookie_back, 0, 0, 0, 0, 1920, 1080, 1920, 1080);
+//imagecopyresampled($imagecontainer, $wookie_back, 0, 0, 0, 0, 1920, 1080, 1920, 1080);
 
 $rbtv = json_decode(CallAPI('GET','www.rocketbeans.tv/?next5Shows=true'));
 
@@ -75,7 +75,7 @@ for ($i = 1; $i < 5; $i++) {
 		imagecopyresampled($imagecontainer, $live, 1300, 1010 + $i*12, 0, 0, 383/14, 223/14, 383, 223);
 		ImageTTFText($imagecontainer, 10, 0, 1330, 1022 + $i*12, $black, "/usr/share/fonts/TTF/Norasi-Italic.ttf",
 		date("H:i",strtotime($rbtv[$i]->time)) . ": " . $rbtv[$i]->title .' - '. $rbtv[$i]->topic);
-	} elseif ($rbtv[1]->isNew == 1) {
+	} elseif ($rbtv[$i]->isNew == 1) {
 		imagecopyresampled($imagecontainer, $PREMIERE, 1300, 1010 + $i*12, 0, 0, 692/14, 173/14, 692, 173);
 		ImageTTFText($imagecontainer, 10, 0, 1350, 1022 + $i*12, $black, "/usr/share/fonts/TTF/Norasi-Italic.ttf",
 		date("H:i",strtotime($rbtv[$i]->time)) . ": " . $rbtv[$i]->title .' - '. $rbtv[$i]->topic);
