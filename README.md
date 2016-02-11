@@ -7,4 +7,4 @@
  * * * * * /usr/bin/php /path/to/index.php
 ```
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot_2.png)
