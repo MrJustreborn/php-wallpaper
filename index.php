@@ -32,6 +32,7 @@ imagecopyresampled($imagecontainer, $wookie_back, 0, 0, 0, 0, 1920, 1080, 1920, 
 
 $rbtv = json_decode(CallAPI('GET','www.rocketbeans.tv/?next5Shows=true'));
 
+//var_dump($rbtv);
 
 $length = strtotime($rbtv[0]->time)+$rbtv[0]->length-$cur_time;
 if ($length <= 0) {
@@ -52,7 +53,7 @@ imagecopyresampled($imagecontainer, $bar_klein, 1300, 1000, 0, 0, 500*$percent, 
 imagecopyresampled($imagecontainer, $wookie, 0, 0, 0, 0, 1920, 1080, 1920, 1080);
 
 
-
+//current
 if ($rbtv[0]->isLive == 1) {
 	imagecopyresampled($imagecontainer, $live, 1300, 970, 0, 0, 383/7, 223/7, 383, 223);
 	ImageTTFText($imagecontainer, 15, 0, 1355, 990, $black, "/usr/share/fonts/TTF/Norasi-BoldOblique.ttf",
@@ -68,12 +69,26 @@ if ($rbtv[0]->isLive == 1) {
 ImageTTFText($imagecontainer, 15, 0, 1800, 1016, $black, "/usr/share/fonts/TTF/Norasi-BoldOblique.ttf",
 		$timeleft);
 
-ImageTTFText($imagecontainer, 10, 0, 1300, 1040, $black, "/usr/share/fonts/TTF/Norasi-Italic.ttf",
-	date("H:i",strtotime($rbtv[1]->time)) . ": " . $rbtv[1]->title .' - '. $rbtv[1]->topic);
-ImageTTFText($imagecontainer, 10, 0, 1300, 1055, $black_alpha1, "/usr/share/fonts/TTF/Norasi-Italic.ttf",
-	date("H:i",strtotime($rbtv[2]->time)) . ": " . $rbtv[2]->title .' - '. $rbtv[2]->topic);
-ImageTTFText($imagecontainer, 10, 0, 1300, 1070, $black_alpha2, "/usr/share/fonts/TTF/Norasi-Italic.ttf",
-	date("H:i",strtotime($rbtv[3]->time)) . ": " . $rbtv[3]->title .' - '. $rbtv[3]->topic);
+//next
+for ($i = 1; $i < 5; $i++) {
+	if ($rbtv[$i]->isLive == 1) {
+		imagecopyresampled($imagecontainer, $live, 1300, 1010 + $i*12, 0, 0, 383/14, 223/14, 383, 223);
+		ImageTTFText($imagecontainer, 10, 0, 1330, 1022 + $i*12, $black, "/usr/share/fonts/TTF/Norasi-Italic.ttf",
+		date("H:i",strtotime($rbtv[$i]->time)) . ": " . $rbtv[$i]->title .' - '. $rbtv[$i]->topic);
+	} elseif ($rbtv[1]->isNew == 1) {
+		imagecopyresampled($imagecontainer, $PREMIERE, 1300, 1010 + $i*12, 0, 0, 692/14, 173/14, 692, 173);
+		ImageTTFText($imagecontainer, 10, 0, 1350, 1022 + $i*12, $black, "/usr/share/fonts/TTF/Norasi-Italic.ttf",
+		date("H:i",strtotime($rbtv[$i]->time)) . ": " . $rbtv[$i]->title .' - '. $rbtv[$i]->topic);
+	} else {
+		ImageTTFText($imagecontainer, 10, 0, 1300, 1022 + $i*12, $black, "/usr/share/fonts/TTF/Norasi-Italic.ttf",
+		date("H:i",strtotime($rbtv[$i]->time)) . ": " . $rbtv[$i]->title .' - '. $rbtv[$i]->topic);
+	}
+}
+
+//ImageTTFText($imagecontainer, 10, 0, 1300, 1055, $black_alpha1, "/usr/share/fonts/TTF/Norasi-Italic.ttf",
+//	date("H:i",strtotime($rbtv[2]->time)) . ": " . $rbtv[2]->title .' - '. $rbtv[2]->topic);
+//ImageTTFText($imagecontainer, 10, 0, 1300, 1070, $black_alpha2, "/usr/share/fonts/TTF/Norasi-Italic.ttf",
+//	date("H:i",strtotime($rbtv[3]->time)) . ": " . $rbtv[3]->title .' - '. $rbtv[3]->topic);
 
 
 
