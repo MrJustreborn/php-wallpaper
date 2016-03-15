@@ -26,6 +26,7 @@ $bar_klein = imagecreatefrompng($path.'/images/progress/bar_klein_alpha.png');
 $bar_klein_green = imagecreatefrompng($path.'/images/progress/bar_klein_green_alpha.png');
 $bar_klein_lila = imagecreatefrompng($path.'/images/progress/bar_klein_lila_alpha.png');
 $wookie = imagecreatefrompng($path.'/images/wookie.png');
+$preview = imagecreatefromjpeg('http://static-cdn.jtvnw.net/previews-ttv/live_user_rocketbeanstv-200x117.jpg');
 
 $wookie_back = imagecreatefromjpeg($path.'/images/wookie.jpg');
 //imagecopyresampled($imagecontainer, $wookie_back, 0, 0, 0, 0, 1920, 1080, 1920, 1080);
@@ -51,6 +52,7 @@ if ($percent >= 1) {
 
 imagecopyresampled($imagecontainer, $bar_klein, 1300, 1000, 0, 0, 500*$percent, 21, 1, 21);
 imagecopyresampled($imagecontainer, $wookie, 0, 0, 0, 0, 1920, 1080, 1920, 1080);
+imagecopyresampled($imagecontainer, $preview, 1090, 960, 0, 0, 200, 117, 200, 117);
 
 
 //current
